@@ -13,7 +13,7 @@ $(".btn").click(function() {
     
     playSound(userChosenColour);
     animatePress(userChosenColour);
-
+    checkAnswer(userClickedPattern.length -1);
 });
 
 
@@ -57,7 +57,7 @@ function animatePress(currentColour) {
 }
 
 // Detect any keypress in the body
-// In order to check the pressed key is "A", I need to use event as a parameter.
+// Need to keep track the game has started or not
 $(document).keypress(function () {
     if (!started) {
         nextSequence();
@@ -71,3 +71,14 @@ $(document).keypress(function () {
         started = true;
     }
     });
+
+    function checkAnswer(currentLevel) {
+        if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
+            if (userClickedPattern.every(function(value, index){
+                return value === gamePattern[index];})) {
+                    setTimeout(nextSequence(), 1000);
+                }
+        } else {
+            
+        }
+    }
