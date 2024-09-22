@@ -1,6 +1,8 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
+var level = 0;
+var started = false;
 
 // When user click any button which has btn class, it execute the function.
 // The Clicked button assign to userChoseColor and add it to userClickedPattern.
@@ -54,11 +56,18 @@ function animatePress(currentColour) {
     }, 100);
 }
 
-var level = 0;
-
-$(document).keypress(function (event) {
-    if (event.key === 'a') {
+// Detect any keypress in the body
+// In order to check the pressed key is "A", I need to use event as a parameter.
+$(document).keypress(function () {
+    if (!started) {
         nextSequence();
-        document.getElementById("level-title").innerHTML = "Level " + level;
+
+        // If the user pressed "A" key, the title will be changed by it's level.
+        // it's my version using JavaScript
+        //document.getElementById("level-title").innerHTML = "Level " + level;
+        
+        // Using Jquery
+        $("#level-title").text("Level " + level);
+        started = true;
     }
-    })
+    });
