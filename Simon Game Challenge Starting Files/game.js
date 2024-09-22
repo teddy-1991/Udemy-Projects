@@ -32,6 +32,7 @@ function nextSequence() {
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
     playSound(randomChosenColour);
+    level++;
 
     }
 
@@ -52,3 +53,12 @@ function animatePress(currentColour) {
         $("#" + currentColour).removeClass("pressed");
     }, 100);
 }
+
+var level = 0;
+
+$(document).keypress(function (event) {
+    if (event.key === 'a') {
+        nextSequence();
+        document.getElementById("level-title").innerHTML = "Level " + level;
+    }
+    })
