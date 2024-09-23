@@ -4,6 +4,24 @@ var userClickedPattern = [];
 var level = 0;
 var started = false;
 
+
+// Detect any keypress in the body
+// Need to keep track the game has started or not
+$(document).keypress(function () {
+    if (!started) {
+        // If the user pressed "A" key, the title will be changed by it's level.
+        // it's my version using JavaScript
+        //document.getElementById("level-title").innerHTML = "Level " + level;
+        
+        // Using Jquery
+        $("#level-title").text("Level " + level);
+        nextSequence();
+
+        started = true;
+    }
+    });
+
+
 // When user click any button which has btn class, it execute the function.
 // The Clicked button assign to userChoseColor and add it to userClickedPattern.
 $(".btn").click(function() {
@@ -16,6 +34,41 @@ $(".btn").click(function() {
     checkAnswer(userClickedPattern.length -1);
 });
 
+// I don't understand if condition. 
+// is comparing the length the right way?? 
+// I clicked wrong color and made it same length. It continued to play a game.
+// I guess, it should be implemented. 
+function checkAnswer(currentLevel) {
+    if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
+        
+        console.log("success");
+
+        if (userClickedPattern.length === gamePattern.length){
+            
+            setTimeout(function () {
+                nextSequence();
+            }, 1000);
+        }
+    } else {
+        console.log("wrong");
+
+        // my version
+        // var audio = new Audio("sounds/wrong.mp3");
+        // audio.play();
+
+        // recomended answer (this one is better)
+        playSound("Wrong");
+
+        $("body").addClass("game-over");
+
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        }, 200);
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+        
+    }
+}
 
 function nextSequence() {
 
@@ -59,38 +112,5 @@ function animatePress(currentColour) {
     }, 100);
 }
 
-// Detect any keypress in the body
-// Need to keep track the game has started or not
-$(document).keypress(function () {
-    if (!started) {
-        // If the user pressed "A" key, the title will be changed by it's level.
-        // it's my version using JavaScript
-        //document.getElementById("level-title").innerHTML = "Level " + level;
-        
-        // Using Jquery
-        $("#level-title").text("Level " + level);
-        nextSequence();
 
-        started = true;
-    }
-    });
 
-// I don't understand if condition. 
-// is comparing the length the right way?? 
-// I clicked wrong color and made it same length. It continued to play a game.
-// I guess, it should be implemented. 
-    function checkAnswer(currentLevel) {
-        if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
-            
-            console.log("success");
-
-            if (userClickedPattern.length === gamePattern.length){
-                
-                setTimeout(function () {
-                    nextSequence();
-                }, 1000);
-            }
-        } else {
-            console.log("wrong");
-        }
-    }
