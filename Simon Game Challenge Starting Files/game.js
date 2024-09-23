@@ -19,6 +19,11 @@ $(".btn").click(function() {
 
 function nextSequence() {
 
+    userClickedPattern = [];
+
+    level++;
+    $("#level-title").text("Level " + level);
+
     // Pick a random number between 0 and 3.
     var randomNumber = Math.floor(Math.random() * 4);
     
@@ -34,8 +39,6 @@ function nextSequence() {
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
     playSound(randomChosenColour);
-    level++;
-
     }
 
 
@@ -60,25 +63,34 @@ function animatePress(currentColour) {
 // Need to keep track the game has started or not
 $(document).keypress(function () {
     if (!started) {
-        nextSequence();
-
         // If the user pressed "A" key, the title will be changed by it's level.
         // it's my version using JavaScript
         //document.getElementById("level-title").innerHTML = "Level " + level;
         
         // Using Jquery
         $("#level-title").text("Level " + level);
+        nextSequence();
+
         started = true;
     }
     });
 
+// I don't understand if condition. 
+// is comparing the length the right way?? 
+// I clicked wrong color and made it same length. It continued to play a game.
+// I guess, it should be implemented. 
     function checkAnswer(currentLevel) {
         if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
-            if (userClickedPattern.every(function(value, index){
-                return value === gamePattern[index];})) {
-                    setTimeout(nextSequence(), 1000);
-                }
-        } else {
             
+            console.log("success");
+
+            if (userClickedPattern.length === gamePattern.length){
+                
+                setTimeout(function () {
+                    nextSequence();
+                }, 1000);
+            }
+        } else {
+            console.log("wrong");
         }
     }
