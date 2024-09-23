@@ -33,7 +33,7 @@ $(".btn").click(function() {
     animatePress(userChosenColour);
     checkAnswer(userClickedPattern.length -1);
 });
-
+// ddjflajkasdlfkjdsldlsjejdkjd
 // Study more this if statment logic
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
