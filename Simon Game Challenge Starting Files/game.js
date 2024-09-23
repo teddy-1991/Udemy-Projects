@@ -34,10 +34,7 @@ $(".btn").click(function() {
     checkAnswer(userClickedPattern.length -1);
 });
 
-// I don't understand if condition. 
-// is comparing the length the right way?? 
-// I clicked wrong color and made it same length. It continued to play a game.
-// I guess, it should be implemented. 
+// Study more this if statment logic
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] == userClickedPattern[currentLevel]){
         
@@ -48,23 +45,23 @@ function checkAnswer(currentLevel) {
             }, 1000);
         }
     } else {
-
+        console.log("Wrong");
         // my version
         // var audio = new Audio("sounds/wrong.mp3");
         // audio.play();
 
         // recomended answer (this one is better)
-        playSound("Wrong");
+        // playSound("Wrong");
 
-        $("body").addClass("game-over");
+        // $("body").addClass("game-over");
 
-        setTimeout(function() {
-            $("body").removeClass("game-over");
-        }, 200);
+        // setTimeout(function() {
+        //     $("body").removeClass("game-over");
+        // }, 200);
 
-        $("#level-title").text("Game Over, Press Any Key to Restart");
+        // $("#level-title").text("Game Over, Press Any Key to Restart");
         
-        startOver();
+        // startOver();
     }
 }
 
